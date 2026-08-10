@@ -1,0 +1,26 @@
+{% extends "base.html" %}{% block title %}货源搜索{% endblock %}
+{% block content %}
+<div class="dashboard-layout">
+{% include "includes/buyer_sidebar.html" %}
+<div class="dashboard-body">
+<div class="page-header"><h1>货源搜索</h1></div>
+<div class="filter-bar">
+    <form method="GET" style="display:flex;gap:12px;align-items:end">
+        <div class="form-group"><label>关键词</label><input type="text" name="keyword" value="{{ keyword }}"></div>
+        <button type="submit" class="btn btn-primary">搜索</button>
+    </form>
+</div>
+<div class="product-grid">
+{% for p in products %}
+<div class="product-card">
+    <a href="/buyer/product/{{ p.id }}"><div class="product-card-image">{% if p.img %}<img src="/{{ p.img }}">{% else %}<img src="{{ url_for('static',filename='images/1.jpg') }}">{% endif %}</div></a>
+    <div class="product-card-body">
+        <div class="product-title"><a href="/buyer/product/{{ p.id }}">{{ p.name }}</a></div>
+        <p class="product-origin">{{ p.origin or '' }} &middot; {{ p.company_name }}</p>
+        <p class="product-price">&yen;{{ '%.2f'|format(p.price) }}<small>/{{ p.unit or '斤' }}</small></p>
+    </div>
+</div>
+{% endfor %}
+</div>
+</div></div>
+{% endblock %}

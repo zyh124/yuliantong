@@ -1,0 +1,25 @@
+{% extends "base.html" %}{% block title %}{{ '编辑商品' if product else '发布商品' }}{% endblock %}
+{% block content %}
+<div class="dashboard-layout">
+{% include "includes/supplier_sidebar.html" %}
+<div class="dashboard-body">
+<div class="page-header"><h1>{{ '编辑商品' if product else '发布商品' }}</h1></div>
+{% if msg %}<div class="alert alert-success">{{ msg }}</div>{% endif %}{% if err %}<div class="alert alert-error">{{ err }}</div>{% endif %}
+<div class="chart-box mb-20"><h3>基本信息</h3>
+<form method="POST" enctype="multipart/form-data">
+<div class="form-row"><div class="form-group"><label>商品名称 *</label><input type="text" name="name" required value="{{ product.name if product else '' }}"></div><div class="form-group"><label>分类</label><select name="category_id"><option value="">请选择</option>{% for c in cats %}<option value="{{ c.id }}" {% if product and product.category_id==c.id %}selected{% endif %}>{% if c.parent_id %}--{% endif %}{{ c.name }}</option>{% endfor %}</select></div></div>
+<div class="form-row"><div class="form-group"><label>产地</label><input type="text" name="origin" value="{{ product.origin if product else '' }}"></div><div class="form-group"><label>规格</label><input type="text" name="spec_desc" value="{{ product.spec_desc if product else '' }}"></div></div>
+<div class="form-row"><div class="form-group"><label>价格 *</label><input type="number" step="0.01" name="price" required value="{{ product.price if product else '' }}"></div><div class="form-group"><label>库存</label><input type="number" name="stock" value="{{ product.stock if product else 0 }}"></div><div class="form-group"><label>单位</label><input type="text" name="unit" value="{{ product.unit if product else '斤' }}"></div><div class="form-group"><label>最小起订量</label><input type="number" name="min_order" value="{{ product.min_order if product else 1 }}"></div></div>
+<div class="form-group"><label>商品图片</label><input type="file" name="product_image" accept="image/*">{% if images %}<div style="display:flex;gap:8px;margin-top:8px;flex-wrap:wrap">{% for img in images %}<div style="position:relative;display:inline-block"><img src="/{{ img.image_path }}" style="width:80px;height:80px;object-fit:cover;border-radius:4px"><a href="/supplier/product/{{ product.id }}/delimg/{{ img.id }}?pid={{ product.id }}" onclick="return confirm('确定删除此图片？')" style="position:absolute;top:-6px;right:-6px;width:20px;height:20px;background:#c00;color:#fff;border-radius:50%;text-align:center;line-height:20px;font-size:12px;text-decoration:none">x</a></div>{% endfor %}</div>{% endif %}</div>
+</div>
+<div class="chart-box mb-20"><h3>溯源信息</h3>
+<div class="form-row"><div class="form-group"><label>养殖基地</label><input type="text" name="breeding_base" value="{{ trace.breeding_base if trace else '' }}"></div><div class="form-group"><label>地理位置</label><input type="text" name="geo_location" value="{{ trace.geo_location if trace else '' }}"></div></div>
+<div class="form-row"><div class="form-group"><label>养殖方式</label><select name="breeding_method"><option value="">请选择</option>{% for m in ['深水网箱','生态围塘','循环水养殖','池塘养殖'] %}<option value="{{ m }}" {% if trace and trace.breeding_method==m %}selected{% endif %}>{{ m }}</option>{% endfor %}</select></div><div class="form-group"><label>出塘日期</label><input type="date" name="harvest_time" value="{{ trace.harvest_time if trace else '' }}"></div></div>
+<div class="form-row"><div class="form-group"><label>保鲜方式</label><select name="preservation"><option value="">请选择</option>{% for m in ['冷藏','冷冻','活体运输','冰鲜'] %}<option value="{{ m }}" {% if trace and trace.preservation==m %}selected{% endif %}>{{ m }}</option>{% endfor %}</select></div><div class="form-group"><label>配送范围</label><input type="text" name="delivery_range" value="{{ trace.delivery_range if trace else '' }}"></div></div>
+<div class="form-group"><label>地理标志认证</label><input type="text" name="geo_certification" value="{{ trace.geo_certification if trace else '' }}"></div>
+</div>
+<button type="submit" class="btn btn-primary btn-lg">{{ '保存修改' if product else '提交审核' }}</button>
+<a href="/supplier/products" class="btn btn-outline btn-lg">返回列表</a>
+</form>
+</div></div>
+{% endblock %}

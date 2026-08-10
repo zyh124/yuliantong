@@ -1,0 +1,10 @@
+{% extends "base.html" %}{% block title %}商品管理{% endblock %}
+{% block content %}
+<div class="dashboard-layout">
+{% include "includes/supplier_sidebar.html" %}
+<div class="dashboard-body">
+<div class="page-header"><h1>商品管理</h1><div class="btn-group"><a href="/supplier/product/add" class="btn btn-primary">添加商品</a></div></div>
+<div class="filter-bar"><form method="GET" style="display:flex;gap:12px;align-items:end"><div class="form-group"><label>状态</label><select name="status"><option value="">全部</option><option value="pending" {% if status=='pending' %}selected{% endif %}>待审核</option><option value="approved" {% if status=='approved' %}selected{% endif %}>已上架</option><option value="offline" {% if status=='offline' %}selected{% endif %}>已下架</option></select></div><button type="submit" class="btn btn-primary">筛选</button></form></div>
+<div class="table-container"><table><thead><tr><th>商品名称</th><th>分类</th><th>产地</th><th>价格</th><th>库存</th><th>状态</th><th>操作</th></tr></thead><tbody>{% for p in products %}{% set smap={'pending':'待审核','approved':'已上架','rejected':'已驳回','offline':'已下架'} %}{% set bmap={'pending':'badge-pending','approved':'badge-approved','rejected':'badge-rejected','offline':'badge-cancelled'} %}<tr><td>{{ p.name }}</td><td>{{ p.cat_name or '-' }}</td><td>{{ p.origin }}</td><td>{{ format_price(p.price) }}</td><td>{{ p.stock }} {{ p.unit or '斤' }}</td><td><span class="badge {{ bmap[p.status] }}">{{ smap[p.status] }}</span></td><td><div class="btn-group"><a href="/supplier/product/edit/{{ p.id }}" class="btn btn-sm btn-outline">编辑</a>{% if p.status=='approved' %}<a href="/supplier/product/offline/{{ p.id }}" class="btn btn-sm btn-warning">下架</a>{% elif p.status=='offline' %}<a href="/supplier/product/online/{{ p.id }}" class="btn btn-sm btn-success">上架</a>{% endif %}</div></td></tr>{% endfor %}</tbody></table></div>
+</div></div>
+{% endblock %}

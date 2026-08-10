@@ -1,0 +1,18 @@
+{% extends "base_home.html" %}{% block title %}注册入驻{% endblock %}
+{% block content %}
+<div class="auth-page"><div class="auth-card auth-card-wide">
+<div class="auth-header"><div class="auth-logo">Y</div><h2>注册入驻渔链通</h2><p>基础功能免费，开启水产品数字化营销之旅</p></div>
+{% if error %}<div class="alert alert-error">{{ error }}</div>{% endif %}
+{% if success %}<div class="alert alert-success">{{ success }}</div><p class="text-center"><a href="/login" class="btn btn-primary">前往登录</a></p>
+{% else %}
+<form method="POST" class="auth-form">
+<div class="form-row"><div class="form-group"><label>用户名 <span style="color:#c00">*</span></label><input type="text" name="username" required placeholder="字母数字下划线，至少3位"></div><div class="form-group"><label>密码 <span style="color:#c00">*</span></label><input type="password" name="password" required placeholder="至少6位"></div></div>
+<div class="form-group"><label>注册角色 <span style="color:#c00">*</span></label><div class="role-select"><label class="role-option"><input type="radio" name="role" value="supplier" checked><span class="role-label"><strong>供应商</strong><small>养殖基地 / 流通商 / 合作社</small></span></label><label class="role-option"><input type="radio" name="role" value="buyer"><span class="role-label"><strong>采购商</strong><small>餐饮 / 商超 / 批发市场</small></span></label></div></div>
+<div class="form-row"><div class="form-group"><label>企业名称 <span style="color:#c00">*</span></label><input type="text" name="company_name" required placeholder="营业执照全称"></div><div class="form-group"><label>联系人 <span style="color:#c00">*</span></label><input type="text" name="contact_name" required placeholder="真实姓名"></div></div>
+<div class="form-row"><div class="form-group"><label>手机号 <span style="color:#c00">*</span></label><input type="text" name="phone" required placeholder="11位手机号" maxlength="11"></div><div class="form-group"><label>邮箱 <span style="color:#c00">*</span></label><input type="email" name="email" required placeholder="example@company.com"></div></div>
+<div class="form-group"><label>地址 <span style="color:#c00">*</span></label><input type="text" name="address" required placeholder="省/市/区/详细地址"></div>
+<button type="submit" class="btn btn-primary btn-block">提交注册申请</button></form>
+<div class="auth-footer"><p>已有账号？<a href="/login">立即登录</a></p></div>
+{% endif %}
+</div></div>
+{% endblock %}

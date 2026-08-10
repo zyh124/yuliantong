@@ -1,0 +1,10 @@
+{% extends "base.html" %}{% block title %}用户详情{% endblock %}
+{% block content %}
+<div class="dashboard-layout">
+{% include "includes/admin_sidebar.html" %}
+<div class="dashboard-body"><div class="page-header"><h1>用户详情</h1><a href="/admin/users" class="btn btn-outline">返回</a></div>
+<div class="panel"><div class="panel-header">基本信息</div><div class="panel-body"><table class="detail-table" style="width:100%"><tr><td style="width:120px">用户ID</td><td>{{ u.id }}</td></tr><tr><td>用户名</td><td>{{ u.username }}</td></tr><tr><td>角色</td><td>{% set rm={'supplier':'供应商','buyer':'采购商','admin':'管理员'} %}{{ rm.get(u.role,u.role) }}</td></tr><tr><td>状态</td><td>{% set sm={'active':'正常','pending':'待审核','banned':'已禁用'} %}{{ sm.get(u.status,u.status) }}</td></tr><tr><td>注册时间</td><td>{{ u.created_at }}</td></tr></table></div></div>
+<div class="panel"><div class="panel-header">企业信息</div><div class="panel-body"><table class="detail-table" style="width:100%"><tr><td style="width:120px">企业名称</td><td>{{ u.company_name }}</td></tr><tr><td>联系人</td><td>{{ u.contact_name }}</td></tr><tr><td>手机号</td><td>{{ mask_phone(u.phone) }}</td></tr><tr><td>邮箱</td><td>{{ u.email }}</td></tr><tr><td>地址</td><td>{{ u.address }}</td></tr></table></div></div>
+<div class="mt-20">{% if u.status=='pending' %}<a href="/admin/user/{{ u.id }}/approve" class="btn btn-success">审核通过</a>{% endif %}{% if u.status=='active' %}<a href="/admin/user/{{ u.id }}/ban" class="btn btn-warning">禁用账号</a>{% endif %}{% if u.status=='banned' %}<a href="/admin/user/{{ u.id }}/unban" class="btn btn-success">启用账号</a>{% endif %}</div>
+</div></div>
+{% endblock %}

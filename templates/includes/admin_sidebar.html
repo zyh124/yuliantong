@@ -1,0 +1,8 @@
+<aside class="sidebar">
+<div class="sidebar-label">管理后台</div>
+<a href="/admin" class="{{ 'active' if request.path=='/admin' }}">平台看板</a>
+<a href="/admin/users" class="{{ 'active' if '/admin/user' in request.path }}">用户管理</a>
+<a href="/admin/products" class="{{ 'active' if '/admin/product' in request.path }}">商品审核</a>
+<a href="/admin/orders" class="{{ 'active' if '/admin/orders' in request.path }}">订单监管</a>
+<a href="/admin/reports" class="{{ 'active' if '/admin/reports' in request.path }}">数据报表</a>
+</aside>

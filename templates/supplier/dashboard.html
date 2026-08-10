@@ -1,0 +1,21 @@
+{% extends "base.html" %}{% block title %}数据看板{% endblock %}
+{% block content %}
+<div class="dashboard-layout">
+{% include "includes/supplier_sidebar.html" %}
+<div class="dashboard-body">
+<div class="page-header"><h1>数据看板</h1><span>{{ session.company_name }}</span></div>
+<div class="stats-grid">
+    <div class="stat-card"><div class="stat-label">商品总数</div><div class="stat-value">{{ pc }}</div><div class="stat-sub">已上架商品</div></div>
+    <div class="stat-card"><div class="stat-label">总订单</div><div class="stat-value">{{ oc }}</div><div class="stat-sub">{{ pend }} 待处理</div></div>
+    <div class="stat-card"><div class="stat-label">销售额</div><div class="stat-value">{{ format_price(ts) }}</div><div class="stat-sub">已完成订单</div></div>
+</div>
+{% if pend>0 %}<div class="alert alert-warning">您有 <strong>{{ pend }}</strong> 个待处理订单<a href="/supplier/orders?status=pending" class="btn btn-sm btn-primary" style="margin-left:12px">立即处理</a></div>{% endif %}
+<div class="charts-row">
+    <div class="chart-box"><h3>商品销量分布</h3>{% if pie_data and pie_data[0].qty>0 %}<canvas id="productPie" style="max-height:260px"></canvas><script>new Chart(document.getElementById('productPie'),{type:'doughnut',data:{labels:[{% for d in pie_data %}'{{ d.name }}'{% if not loop.last %},{% endif %}{% endfor %}],datasets:[{data:[{% for d in pie_data %}{{ d.qty }}{% if not loop.last %},{% endif %}{% endfor %}],backgroundColor:['#163172','#1e56a0','#2980b9','#3498db','#5dade2','#85c1e9']}]},options:{plugins:{legend:{position:'bottom',labels:{padding:16,usePointStyle:true}}}}});</script>{% else %}<p class="text-muted" style="padding:40px 0;text-align:center">暂无销售数据</p>{% endif %}</div>
+    <div class="chart-box"><h3>订单状态分布</h3>{% if status_data %}{% set sc={'pending':'#f39c12','confirmed':'#3498db','shipped':'#1e56a0','completed':'#27ae60','cancelled':'#95a5a6'} %}{% set sn={'pending':'待确认','confirmed':'已确认','shipped':'已发货','completed':'已完成','cancelled':'已取消'} %}<canvas id="statusPie" style="max-height:260px"></canvas><script>new Chart(document.getElementById('statusPie'),{type:'doughnut',data:{labels:[{% for d in status_data %}'{{ sn[d.status] }}'{% if not loop.last %},{% endif %}{% endfor %}],datasets:[{data:[{% for d in status_data %}{{ d.cnt }}{% if not loop.last %},{% endif %}{% endfor %}],backgroundColor:[{% for d in status_data %}'{{ sc[d.status] }}'{% if not loop.last %},{% endif %}{% endfor %}]}]},options:{plugins:{legend:{position:'bottom',labels:{padding:16,usePointStyle:true}}}}});</script>{% endif %}</div>
+</div>
+<div class="charts-row">
+    <div class="chart-box"><h3>热销商品 TOP5</h3>{% if top %}<table><thead><tr><th>#</th><th>商品</th><th>单价</th><th>销量</th></tr></thead><tbody>{% for p in top %}{% set r=loop.index %}<tr><td style="font-weight:600;color:var(--navy)">{{ r }}</td><td>{{ p.name }}</td><td>{{ format_price(p.price) }}</td><td>{{ p.tq or 0 }} / {{ p.oc }}单</td></tr>{% endfor %}</tbody></table>{% else %}<p class="text-muted" style="padding:40px 0;text-align:center">暂无销售数据</p>{% endif %}</div>
+    <div class="chart-box"><h3>最近订单</h3>{% if recent %}{% set smap={'pending':'待确认','confirmed':'已确认','shipped':'已发货','completed':'已完成','cancelled':'已取消'} %}{% set bmap={'pending':'badge-pending','confirmed':'badge-confirmed','shipped':'badge-shipped','completed':'badge-completed','cancelled':'badge-cancelled'} %}<table><thead><tr><th>订单号</th><th>采购商</th><th>金额</th><th>状态</th></tr></thead><tbody>{% for o in recent %}<tr><td><a href="/supplier/order/{{ o.id }}">{{ o.order_no }}</a></td><td>{{ o.buyer_name }}</td><td>{{ format_price(o.total_amount) }}</td><td><span class="badge {{ bmap[o.status] }}">{{ smap[o.status] }}</span></td></tr>{% endfor %}</tbody></table>{% else %}<p class="text-muted" style="padding:40px 0;text-align:center">暂无订单</p>{% endif %}</div>
+</div></div></div>
+{% endblock %}

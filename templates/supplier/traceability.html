@@ -1,0 +1,14 @@
+{% extends "base.html" %}{% block title %}溯源管理{% endblock %}
+{% block content %}
+<div class="dashboard-layout">
+{% include "includes/supplier_sidebar.html" %}
+<div class="dashboard-body"><div class="page-header"><h1>溯源管理</h1></div>
+{% for p in products %}<div class="chart-box mb-20"><h3>{{ p.name }} <small style="color:var(--text-light)">{{ p.origin }}</small></h3>
+<form method="POST"><input type="hidden" name="product_id" value="{{ p.id }}">
+<div class="form-row"><div class="form-group"><label>养殖基地</label><input type="text" name="breeding_base" value="{{ p.breeding_base or '' }}"></div><div class="form-group"><label>地理位置</label><input type="text" name="geo_location" value="{{ p.geo_location or '' }}"></div></div>
+<div class="form-row"><div class="form-group"><label>养殖方式</label><select name="breeding_method"><option value="">请选择</option>{% for m in ['深水网箱','生态围塘','循环水养殖','池塘养殖'] %}<option value="{{ m }}" {% if p.breeding_method==m %}selected{% endif %}>{{ m }}</option>{% endfor %}</select></div><div class="form-group"><label>出塘日期</label><input type="date" name="harvest_time" value="{{ p.harvest_time or '' }}"></div></div>
+<div class="form-row"><div class="form-group"><label>保鲜方式</label><select name="preservation"><option value="">请选择</option>{% for m in ['冷藏','冷冻','活体运输','冰鲜'] %}<option value="{{ m }}" {% if p.preservation==m %}selected{% endif %}>{{ m }}</option>{% endfor %}</select></div><div class="form-group"><label>配送范围</label><input type="text" name="delivery_range" value="{{ p.delivery_range or '' }}"></div></div>
+<div class="form-group"><label>地理标志认证</label><input type="text" name="geo_certification" value="{{ p.geo_certification or '' }}"></div>
+<button type="submit" class="btn btn-primary">保存</button></form></div>{% endfor %}
+</div></div>
+{% endblock %}

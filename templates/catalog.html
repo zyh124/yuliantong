@@ -1,0 +1,20 @@
+{% extends "base.html" %}{% block title %}商品浏览{% endblock %}
+{% block content %}
+<div class="section-inner" style="padding-top:30px">
+    <div class="section-header"><h2>水产品货源</h2></div>
+    <div class="filter-bar"><form method="GET" style="display:flex;gap:12px;align-items:end"><div class="form-group"><label>关键词</label><input type="text" name="keyword" value="{{ keyword or '' }}"></div><div class="form-group"><label>品类</label><select name="category"><option value="">全部</option><option value="6" {% if request.args.get('category')=='6' %}selected{% endif %}>大黄鱼</option><option value="10" {% if request.args.get('category')=='10' %}selected{% endif %}>南美白对虾</option><option value="11" {% if request.args.get('category')=='11' %}selected{% endif %}>大闸蟹</option><option value="7" {% if request.args.get('category')=='7' %}selected{% endif %}>带鱼</option><option value="12" {% if request.args.get('category')=='12' %}selected{% endif %}>梭子蟹</option></select></div><button type="submit" class="btn btn-primary">筛选</button></form></div>
+    <div class="product-grid">
+    {% for p in products %}
+        <div class="product-card">
+            {% if session.user_id %}<a href="/buyer/product/{{ p.id }}">{% else %}<a href="/login">{% endif %}<div class="product-card-image"><img src="/{{ p.img or 'static/images/1.jpg' }}" alt="{{ p.name }}"></div></a>
+            <div class="product-card-body">
+                <div class="product-title">{% if session.user_id %}<a href="/buyer/product/{{ p.id }}">{% else %}<a href="/login">{% endif %}{{ p.name }}</a></div>
+                <p class="product-origin">{{ p.origin or '优质产地' }} &middot; {{ p.company_name }}</p>
+                <p class="product-price">&yen;{{ '%.2f'|format(p.price) }}<small>/{{ p.unit or '斤' }}</small></p>
+            </div>
+            <div class="product-card-footer">{% if session.user_id %}<a href="/buyer/product/{{ p.id }}" class="btn btn-sm btn-primary">查看详情</a>{% else %}<a href="/login" class="btn btn-sm btn-primary">登录查看</a>{% endif %}</div>
+        </div>
+    {% endfor %}
+    </div>
+</div>
+{% endblock %}

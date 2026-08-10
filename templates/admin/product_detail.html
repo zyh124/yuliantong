@@ -1,0 +1,14 @@
+{% extends "base.html" %}{% block title %}商品详情{% endblock %}
+{% block content %}
+<div class="dashboard-layout">
+{% include "includes/admin_sidebar.html" %}
+<div class="dashboard-body"><div class="page-header"><h1>商品详情</h1><a href="/admin/products" class="btn btn-outline">返回</a></div>
+<div class="detail-layout">
+    <div class="detail-gallery"><div class="main-image">{% if images %}<img src="/{{  images[0].image_path }}">{% endif %}</div></div>
+    <div class="detail-info"><h1>{{ product.name }}</h1><p style="color:var(--text-light)">{{ product.origin }} &middot; {{ product.company_name }}</p>
+        <div class="detail-price"><span class="price-value">{{ format_price(product.price) }}</span></div>
+        <table class="detail-table"><tr><td>规格</td><td>{{ product.spec_desc or '-' }}</td></tr><tr><td>库存</td><td>{{ product.stock }} {{ product.unit or '斤' }}</td></tr><tr><td>最小起订</td><td>{{ product.min_order }}</td></tr><tr><td>状态</td><td>{% set smap={'pending':'待审核','approved':'已通过','rejected':'已驳回','offline':'已下架'} %}{{ smap.get(product.status,product.status) }}</td></tr></table></div>
+</div>
+{% if trace %}<div class="trace-section"><h3>溯源信息</h3><div class="trace-grid">{% if trace.breeding_base %}<div class="trace-item"><div class="trace-label">养殖基地</div><div class="trace-value">{{ trace.breeding_base }}</div></div>{% endif %}{% if trace.geo_location %}<div class="trace-item"><div class="trace-label">地理位置</div><div class="trace-value">{{ trace.geo_location }}</div></div>{% endif %}{% if trace.breeding_method %}<div class="trace-item"><div class="trace-label">养殖方式</div><div class="trace-value">{{ trace.breeding_method }}</div></div>{% endif %}{% if trace.harvest_time %}<div class="trace-item"><div class="trace-label">出塘日期</div><div class="trace-value">{{ trace.harvest_time }}</div></div>{% endif %}</div></div>{% endif %}
+</div></div>
+{% endblock %}

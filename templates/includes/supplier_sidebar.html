@@ -1,0 +1,9 @@
+<aside class="sidebar">
+<div class="sidebar-label">供应商工作台</div>
+<a href="/supplier" class="{{ 'active' if request.path=='/supplier' }}">数据看板</a>
+<a href="/supplier/products" class="{{ 'active' if '/supplier/products' in request.path }}">商品管理</a>
+<a href="/supplier/product/add" class="{{ 'active' if '/supplier/product/add' in request.path }}">发布商品</a>
+<a href="/supplier/orders" class="{{ 'active' if '/supplier/orders' in request.path or '/supplier/order/' in request.path }}">订单处理</a>
+<a href="/supplier/traceability" class="{{ 'active' if '/supplier/traceability' in request.path }}">溯源管理</a>
+<a href="/supplier/profile" class="{{ 'active' if '/supplier/profile' in request.path }}">企业信息</a>
+</aside>

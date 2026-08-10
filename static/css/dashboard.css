@@ -1,0 +1,25 @@
+/* ============================================
+   渔链通 — 仪表盘补充样式
+   ============================================ */
+
+.overview-cards { display: grid; grid-template-columns: repeat(4,1fr); gap: 16px; margin-bottom: 24px; }
+@media (max-width: 992px) { .overview-cards { grid-template-columns: repeat(2,1fr); } }
+@media (max-width: 480px) { .overview-cards { grid-template-columns: 1fr; } }
+
+.chart-box canvas { max-height: 280px; }
+
+.stat-value-large { font-size: 34px; font-weight: 700; color: var(--navy); }
+
+.price-up { color: #e53935; }
+.price-down { color: #2e7d32; }
+.price-flat { color: var(--text-light); }
+
+.recommend-scroll { display: flex; gap: 16px; overflow-x: auto; padding-bottom: 8px; }
+.recommend-scroll .product-card { min-width: 260px; flex-shrink: 0; }
+
+.avatar-placeholder {
+  width: 38px; height: 38px; border-radius: 50%;
+  background: var(--light-blue); color: var(--navy);
+  display: flex; align-items: center; justify-content: center;
+  font-weight: 600; font-size: 14px;
+}

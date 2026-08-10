@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}渔链通{% endblock %}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/dashboard.css') }}">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+</head>
+<body>
+<header class="site-header">
+    <div class="header-inner">
+        <a href="/" class="header-logo"><span class="logo-mark">Y</span>渔链通</a>
+        <nav class="header-nav" id="mainNav">
+            <a href="/">首页</a><a href="/catalog">浏览货源</a><a href="#features">功能</a>
+            {% if session.user_id %}
+                {% if session.role=='supplier' %}<a href="/supplier">看板</a>
+                {% elif session.role=='buyer' %}<a href="/buyer">采购</a>
+                {% elif session.role=='admin' %}<a href="/admin">管理</a>{% endif %}
+                <span style="font-size:13px;color:var(--text-light)">{{ session.username }}</span>
+                <a href="/logout">退出</a>
+            {% else %}<a href="/login">登录</a><a href="/register" class="btn-header">入驻</a>{% endif %}
+        </nav>
+        <button class="mobile-menu-btn" onclick="document.getElementById('mainNav').classList.toggle('active')">&#9776;</button>
+    </div>
+</header>
+<main class="main-content">{% block content %}{% endblock %}</main>
+<footer class="site-footer">
+    <div class="footer-inner">
+        <div><h4>渔链通 YLT</h4><p>水产品数字化营销与供应链信息管理系统</p><p>上海海洋大学大学生创新训练计划项目</p><p style="margin-top:8px">指导教师：彭高翔、陈文渊、马春广、孟佳妮</p></div>
+        <div><h4>导航</h4><ul><li><a href="/">平台首页</a></li><li><a href="/register">供应商入驻</a></li><li><a href="/register">采购商注册</a></li><li><a href="/login">用户登录</a></li></ul></div>
+        <div><h4>品类</h4><ul><li><a href="/catalog?category=1">鱼类</a></li><li><a href="/catalog?category=2">虾蟹类</a></li><li><a href="/catalog?category=3">贝类</a></li></ul></div>
+        <div><h4>联系</h4><p>上海海洋大学</p><p>上海市浦东新区沪城环路999号</p><p style="font-size:12px">龚畇禾、沈育雯、汪晗雪、杨嘉慧、朱奕慧</p></div>
+    </div>
+    <div class="footer-bottom"><p>&copy; 2026 渔链通 YLT &mdash; 上海海洋大学大学生创新训练计划项目成果</p></div>
+</footer>
+<script src="{{ url_for('static', filename='js/main.js') }}"></script>
+</body>
+</html>

@@ -1,0 +1,7 @@
+<aside class="sidebar">
+<div class="sidebar-label">采购商工作台</div>
+<a href="/buyer" class="{{ 'active' if request.path=='/buyer' }}">采购首页</a>
+<a href="/buyer/search" class="{{ 'active' if '/buyer/search' in request.path or '/buyer/product/' in request.path }}">货源搜索</a>
+<a href="/buyer/orders" class="{{ 'active' if '/buyer/orders' in request.path or '/buyer/order/' in request.path }}">采购订单</a>
+<a href="/buyer/profile" class="{{ 'active' if '/buyer/profile' in request.path }}">企业信息</a>
+</aside>

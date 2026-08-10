@@ -1,0 +1,13 @@
+{% extends "base.html" %}{% block title %}订单详情{% endblock %}
+{% block content %}
+<div class="dashboard-layout">
+{% include "includes/buyer_sidebar.html" %}
+<div class="dashboard-body">{% set smap={'pending':'待确认','confirmed':'已确认','shipped':'已发货','completed':'已完成','cancelled':'已取消'} %}
+<div class="page-header"><h1>订单 {{ order.order_no }}</h1><a href="/buyer/orders" class="btn btn-outline">返回列表</a></div>
+<div class="detail-layout">
+    <div class="detail-info"><div class="detail-price"><span class="price-value">{{ format_price(order.total_amount) }}</span><span class="price-unit" style="margin-left:8px;font-size:13px;color:var(--text-secondary)">{{ smap[order.status] }}</span></div><table class="detail-table"><tr><td>订单编号</td><td>{{ order.order_no }}</td></tr><tr><td>供应商</td><td>{{ order.supplier_name }}</td></tr><tr><td>下单时间</td><td>{{ order.created_at }}</td></tr><tr><td>备注</td><td>{{ order.remark or '无' }}</td></tr></table></div>
+    <div class="detail-info"><h3 style="font-size:15px;font-weight:600;color:var(--navy);margin-bottom:14px;padding-bottom:8px;border-bottom:2px solid var(--light-blue)">收货信息</h3><div style="padding:12px 0"><div style="font-size:18px;font-weight:600">{{ order.receiver_name }}</div><div style="font-size:14px;color:var(--text-secondary);margin-bottom:12px">{{ order.receiver_phone }}</div><div style="font-size:14px">{{ order.receiver_address }}</div></div></div>
+</div>
+<div class="panel mt-20"><div class="panel-header">商品明细</div><div class="panel-body"><table style="width:100%"><thead><tr><th>商品</th><th>产地</th><th>单价</th><th>数量</th><th>小计</th></tr></thead><tbody>{% for item in items %}<tr><td style="font-weight:500">{{ item.product_name }}</td><td>{{ item.origin }}</td><td>{{ format_price(item.unit_price) }}</td><td>{{ item.quantity }}</td><td style="font-weight:600;color:var(--navy)">{{ format_price(item.subtotal) }}</td></tr>{% endfor %}</tbody></table></div></div>
+</div></div>
+{% endblock %}

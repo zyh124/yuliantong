@@ -1,0 +1,10 @@
+{% extends "base.html" %}{% block title %}订单处理{% endblock %}
+{% block content %}
+<div class="dashboard-layout">
+{% include "includes/supplier_sidebar.html" %}
+<div class="dashboard-body">
+<div class="page-header"><h1>订单处理</h1></div>
+<div class="filter-bar"><form method="GET" style="display:flex;gap:12px;align-items:end"><div class="form-group"><label>状态</label><select name="status"><option value="">全部</option><option value="pending" {% if status=='pending' %}selected{% endif %}>待确认</option><option value="confirmed" {% if status=='confirmed' %}selected{% endif %}>已确认</option><option value="shipped" {% if status=='shipped' %}selected{% endif %}>已发货</option></select></div><button type="submit" class="btn btn-primary">筛选</button></form></div>
+<div class="table-container"><table><thead><tr><th>订单号</th><th>采购商</th><th>收货人</th><th>金额</th><th>状态</th><th>时间</th><th>操作</th></tr></thead><tbody>{% for o in orders %}{% set smap={'pending':'待确认','confirmed':'已确认','shipped':'已发货','completed':'已完成','cancelled':'已取消'} %}{% set bmap={'pending':'badge-pending','confirmed':'badge-confirmed','shipped':'badge-shipped','completed':'badge-completed','cancelled':'badge-cancelled'} %}<tr><td><a href="/supplier/order/{{ o.id }}">{{ o.order_no }}</a></td><td>{{ o.buyer_name }}</td><td>{{ mask_name(o.receiver_name) }}</td><td>{{ format_price(o.total_amount) }}</td><td><span class="badge {{ bmap[o.status] }}">{{ smap[o.status] }}</span></td><td>{{ time_ago(o.created_at) }}</td><td>{% if o.status=='pending' %}<a href="/supplier/order/{{ o.id }}/confirm" class="btn btn-sm btn-success">确认</a>{% elif o.status=='confirmed' %}<a href="/supplier/order/{{ o.id }}/ship" class="btn btn-sm btn-primary">发货</a>{% elif o.status=='shipped' %}<a href="/supplier/order/{{ o.id }}/complete" class="btn btn-sm btn-primary">完成</a>{% endif %}<a href="/supplier/order/{{ o.id }}" class="btn btn-sm btn-outline">详情</a></td></tr>{% endfor %}</tbody></table></div>
+</div></div>
+{% endblock %}

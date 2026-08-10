@@ -1,0 +1,56 @@
+/* ============================================
+   渔链通 — 响应式适配 (Patagonia风格)
+   ============================================ */
+
+@media (max-width: 992px) {
+  .product-grid { grid-template-columns: repeat(2,1fr); }
+  .card-grid-3 { grid-template-columns: 1fr 1fr; }
+  .category-row { flex-wrap: wrap; } .category-item { width: 33.33%; border-bottom: 1px solid var(--border-light); } .category-item:nth-child(3n) { border-right: none; }
+  .advantage-row { grid-template-columns: repeat(2,1fr); }
+  .detail-layout { grid-template-columns: 1fr; }
+  .split-row { grid-template-columns: 1fr; gap: 32px; }
+  .split-row.reverse .split-image { order: 1; }
+  .split-image img { height: 300px; }
+  .stats-grid { grid-template-columns: repeat(2,1fr); }
+  .charts-row { grid-template-columns: 1fr; }
+  .footer-inner { grid-template-columns: 1fr 1fr; gap: 32px; }
+  .hero-full { height: 60vh; min-height: 400px; }
+  .hero-full .hero-content h1 { font-size: 32px; }
+}
+
+@media (max-width: 768px) {
+  .header-nav { display: none; }
+  .mobile-menu-btn { display: block; }
+  .header-nav.active {
+    display: flex; flex-direction: column;
+    position: absolute; top: 60px; left: 0; right: 0;
+    background: var(--white); padding: 20px;
+    border-bottom: 1px solid var(--border); gap: 12px; z-index: 999;
+  }
+  .product-grid { grid-template-columns: repeat(2,1fr); }
+  .category-row { flex-wrap: wrap; } .category-item { width: 50%; border-bottom: 1px solid var(--border-light); } .category-item:nth-child(even) { border-right: none; }
+  .advantage-row { grid-template-columns: 1fr; }
+  .card-grid-3 { grid-template-columns: 1fr; }
+  .stats-grid { grid-template-columns: 1fr 1fr; }
+  .sidebar { display: none; }
+  .dashboard-body { padding: 16px; }
+  .hero-full { height: 55vh; min-height: 350px; }
+  .hero-full .hero-content h1 { font-size: 26px; }
+  .hero-full .hero-content p { font-size: 14px; }
+  .section-header h2 { font-size: 24px; }
+  .section { padding: 50px 0; }
+  .footer-inner { grid-template-columns: 1fr; gap: 28px; }
+  .form-row { grid-template-columns: 1fr; }
+  .table-container { overflow-x: auto; }
+  table { min-width: 600px; }
+  .page-header { flex-direction: column; gap: 10px; align-items: flex-start; }
+  .auth-card { padding: 28px 24px; }
+}
+
+@media (max-width: 480px) {
+  .product-grid { grid-template-columns: 1fr; }
+  .stats-grid { grid-template-columns: 1fr; }
+  .hero-full { height: 50vh; min-height: 300px; }
+  .hero-full .hero-content h1 { font-size: 22px; }
+  .btn-group { flex-direction: column; }
+}

@@ -1,0 +1,13 @@
+{% extends "base.html" %}{% block title %}数据报表{% endblock %}
+{% block content %}
+<div class="dashboard-layout">
+{% include "includes/admin_sidebar.html" %}
+<div class="dashboard-body"><div class="page-header"><h1>数据报表</h1></div>
+<div class="stats-grid"><div class="stat-card"><div class="stat-label">今日订单</div><div class="stat-value">{{ t_orders }}</div></div><div class="stat-card"><div class="stat-label">今日交易额</div><div class="stat-value">{{ format_price(t_gmv) }}</div></div><div class="stat-card"><div class="stat-label">本月订单</div><div class="stat-value">{{ m_orders }}</div></div><div class="stat-card"><div class="stat-label">本月交易额</div><div class="stat-value">{{ format_price(m_gmv) }}</div></div></div>
+<div class="charts-row">
+    <div class="chart-box"><h3>月度交易趋势</h3>{% if monthly %}<canvas id="monthlyChart"></canvas><script>new Chart(document.getElementById('monthlyChart'),{type:'bar',data:{labels:[{% for m in monthly|reverse %}'{{ m.m }}'{% if not loop.last %},{% endif %}{% endfor %}],datasets:[{label:'交易额(万元)',data:[{% for m in monthly|reverse %}{{ '%.2f'|format(m.g/10000) }}{% if not loop.last %},{% endif %}{% endfor %}],backgroundColor:'#163172'}]},options:{responsive:true}});</script>{% endif %}</div>
+    <div class="chart-box"><h3>品类销售分布</h3>{% if cat_stats %}<canvas id="catChart"></canvas><script>new Chart(document.getElementById('catChart'),{type:'pie',data:{labels:[{% for c in cat_stats %}'{{ c.name }}'{% if not loop.last %},{% endif %}{% endfor %}],datasets:[{data:[{% for c in cat_stats %}{{ c.qty or 0 }}{% if not loop.last %},{% endif %}{% endfor %}],backgroundColor:['#163172','#1e56a0','#2980b9','#3498db','#5dade2','#85c1e9']}]},options:{plugins:{legend:{position:'right'}}}});</script>{% endif %}</div>
+</div>
+<div class="chart-box"><h3>月度统计明细</h3><table><thead><tr><th>月份</th><th>订单数</th><th>交易额</th></tr></thead><tbody>{% for m in monthly %}<tr><td>{{ m.m }}</td><td>{{ m.c }}</td><td>{{ format_price(m.g) }}</td></tr>{% endfor %}</tbody></table></div>
+</div></div>
+{% endblock %}

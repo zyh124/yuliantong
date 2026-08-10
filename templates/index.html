@@ -1,0 +1,140 @@
+{% extends "base_home.html" %}{% block title %}渔链通 - 水产品数字化营销平台{% endblock %}
+{% block content %}
+
+<!-- 全宽大图 Hero -->
+<section class="hero-full">
+    <img src="{{ url_for('static', filename='images/zhoushan_ocean.jpg') }}" alt="舟山深海养殖海域">
+    <div class="hero-overlay"></div>
+    <div class="hero-content">
+        <h1>让每一次水产交易<br>更透明、更高效、更可信</h1>
+        <p>聚焦乡村水产产业的轻量化供需对接与智慧赋能平台</p>
+        <a href="/register" class="hero-cta">免费入驻</a>
+    </div>
+</section>
+
+<!-- 产地直供区 -->
+<section class="section section-white">
+    <div class="section-inner">
+        <div class="section-header"><h2>长三角优质水产品产地直供</h2><p>舟山深海网箱 &middot; 崇明生态养殖 &middot; 青浦循环水产 &mdash; 从养殖基地直达采购商</p></div>
+        <div class="card-grid-3">
+            <div class="photo-card">
+                <img src="{{ url_for('static', filename='images/舟山黄鱼.jpg') }}" alt="舟山深海网箱大黄鱼养殖">
+                <div class="photo-card-text"><h4>舟山 &middot; 深海大黄鱼</h4><p>深远海网箱养殖，仿野生环境生长，肉质鲜美，地理标志认证</p></div>
+            </div>
+            <div class="photo-card">
+                <img src="{{ url_for('static', filename='images/崇明清水蟹.jpg') }}" alt="崇明生态清水蟹养殖基地">
+                <div class="photo-card-text"><h4>崇明 &middot; 生态清水蟹</h4><p>渔光互补低碳养殖示范园，循环水系统，绿色生态水产供应</p></div>
+            </div>
+            <div class="photo-card">
+                <img src="{{ url_for('static', filename='images/国际水产城.jpg') }}" alt="舟山国际水产城全貌">
+                <div class="photo-card-text"><h4>舟山 &middot; 国际水产城</h4><p>全国最大渔业全产业链基地，500+一级批发商，冷链物流完善</p></div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- 品类入口 -->
+<section class="section">
+    <div class="section-inner">
+        <div class="section-header"><h2>水产品类目</h2><p>覆盖长三角主流水产品类，精准匹配供需</p></div>
+        <div class="category-row">
+            <a href="/catalog?category=6" class="category-item"><img src="{{ url_for('static', filename='images/大黄鱼.jpg') }}" alt="大黄鱼"><div class="cat-name">大黄鱼</div><div class="cat-sub">舟山深海网箱</div></a>
+            <a href="/catalog?category=10" class="category-item"><img src="{{ url_for('static', filename='images/南美白对虾.jpg') }}" alt="南美白对虾"><div class="cat-name">南美白对虾</div><div class="cat-sub">崇明生态养殖</div></a>
+            <a href="/catalog?category=11" class="category-item"><img src="{{ url_for('static', filename='images/大闸蟹.jpg') }}" alt="大闸蟹"><div class="cat-name">大闸蟹</div><div class="cat-sub">长三角清水蟹</div></a>
+            <a href="/catalog?category=7" class="category-item"><img src="{{ url_for('static', filename='images/带鱼.jpg') }}" alt="带鱼"><div class="cat-name">带鱼</div><div class="cat-sub">东海捕捞</div></a>
+            <a href="/catalog?category=12" class="category-item"><img src="{{ url_for('static', filename='images/梭子蟹.jpg') }}" alt="梭子蟹"><div class="cat-name">梭子蟹</div><div class="cat-sub">鲜活海产</div></a>
+        </div>
+    </div>
+</section>
+
+<!-- 平台优势 -->
+<section id="features" class="section section-white">
+    <div class="section-inner">
+        <div class="section-header"><h2>专业水产供应链工具</h2><p>轻量化设计，降低使用门槛，专注于水产行业核心需求</p></div>
+        <div class="advantage-row">
+            <div class="advantage-item"><h4>专注水产</h4><p>溯源信息完整展示，阶梯价格批量采购，深度适配水产产业链需求</p></div>
+            <div class="advantage-item"><h4>轻量化操作</h4><p>界面简洁直观，手机电脑多端适配，降低乡村水产从业者使用门槛</p></div>
+            <div class="advantage-item"><h4>数据赋能</h4><p>行业价格指数与市场趋势分析，让数据驱动科学的生产与采购决策</p></div>
+            <div class="advantage-item"><h4>高校背书</h4><p>上海海洋大学水产特色双一流高校，学术公信力与行业资源双重保障</p></div>
+        </div>
+    </div>
+</section>
+
+<!-- 图文交替展示 -->
+<section id="sourcing" class="section">
+    <div class="section-inner">
+        <div class="split-row">
+            <div class="split-image"><img src="{{ url_for('static', filename='images/1.jpg') }}" alt="养殖基地实拍"></div>
+            <div class="split-text">
+                <h3>从养殖基地到采购终端<br>全程信息透明可追溯</h3>
+                <p>供应商可完整记录产品的养殖基地、地理坐标、出塘时间、保鲜方式及配送范围，上传实拍影像与第三方检测报告，为每批次产品构建可信溯源档案。</p>
+                <p>采购商可一站式查看产地实景、认证资质与检验数据，从源头把控品质，告别以次充好、产地冒充等行业乱象，让每一笔采购都心中有数。</p>
+                <a href="/register" class="text-link">入驻发布货源</a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="section section-white">
+    <div class="section-inner">
+        <div class="split-row reverse">
+            <div class="split-image"><img src="{{ url_for('static', filename='images/2.jpg') }}" alt="水产品市场供需数据与价格指数"></div>
+            <div class="split-text">
+                <h3>行业价格指数<br>让每一笔交易都有据可依</h3>
+                <p>平台提供脱敏聚合的行业价格指数，分品类、分产地、分规格展示市场大盘价。供应商科学定价，采购商对比决策，打破信息不对称。</p>
+                <p>市场趋势分析、节假日采购热度预警、禁渔期影响预测，帮助产业链各环节合理安排库存与生产计划。</p>
+                <a href="/catalog" class="text-link">浏览水产品行情</a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- 服务对象 -->
+<section class="section">
+    <div class="section-inner">
+        <div class="section-header"><h2>服务产业链两端</h2><p>连接优质水产品供应商与专业采购商，构建高效透明的数字化流通网络</p></div>
+        <div class="split-row">
+            <a href="/login" style="display:block;padding:40px;background:var(--white);border:1px solid var(--border-light);text-decoration:none;transition:var(--transition);cursor:pointer" onmouseover="this.style.borderColor='var(--navy)'" onmouseout="this.style.borderColor='var(--border-light)'">
+                <h3 style="font-size:22px;font-weight:600;color:var(--navy);margin-bottom:12px">供应商端</h3>
+                <p style="color:var(--text-secondary);line-height:1.7;margin-bottom:10px">面向养殖基地、水产合作社、流通商。提供商品管理、溯源信息填写、订单处理、数据看板、产品模板预设功能。</p>
+                <p style="color:var(--text-light);font-size:14px">点击进入 &rarr;</p>
+            </a>
+            <a href="/login" style="display:block;padding:40px;background:var(--white);border:1px solid var(--border-light);text-decoration:none;transition:var(--transition);cursor:pointer" onmouseover="this.style.borderColor='var(--navy)'" onmouseout="this.style.borderColor='var(--border-light)'">
+                <h3 style="font-size:22px;font-weight:600;color:var(--navy);margin-bottom:12px">采购商端</h3>
+                <p style="color:var(--text-secondary);line-height:1.7;margin-bottom:10px">面向餐饮企业、商超零售、批发市场。提供商品搜索、批量采购、智能推荐、订单管理、溯源查看功能。</p>
+                <p style="color:var(--text-light);font-size:14px">点击进入 &rarr;</p>
+            </a>
+        </div>
+    </div>
+</section>
+
+<!-- 热门商品 -->
+<section class="section section-white">
+    <div class="section-inner">
+        <div class="section-header"><h2>热门水产品</h2><p>点击查看详情，登录后可直接下单采购</p></div>
+        <div class="product-grid">
+        {% for p in products %}
+            <div class="product-card">
+                {% if session.user_id %}<a href="/buyer/product/{{ p.id }}">{% else %}<a href="/login">{% endif %}<div class="product-card-image"><img src="/{{ p.img or 'static/images/1.jpg' }}" alt="{{ p.name }}"></div></a>
+                <div class="product-card-body">
+                    <div class="product-title">{% if session.user_id %}<a href="/buyer/product/{{ p.id }}">{% else %}<a href="/login">{% endif %}{{ p.name }}</a></div>
+                    <p class="product-origin">{{ p.origin or '' }} &middot; {{ p.company_name }}</p>
+                    <p class="product-price">&yen;{{ '%.2f'|format(p.price) }}<small>/{{ p.unit or '斤' }}</small></p>
+                </div>
+                <div class="product-card-footer">
+                    {% if session.user_id %}<a href="/buyer/product/{{ p.id }}" class="btn btn-sm btn-primary">查看详情</a>{% else %}<a href="/login" class="btn btn-sm btn-primary">登录查看</a>{% endif %}
+                </div>
+            </div>
+        {% endfor %}
+        </div>
+    </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section">
+    <h2>加入渔链通，开启数字化水产营销</h2>
+    <p>基础功能免费 &middot; 低佣金模式 &middot; 高校权威背书 &middot; 数据安全保障</p>
+    <a href="/register" class="btn btn-white btn-lg">免费注册入驻</a>
+</section>
+
+{% endblock %}

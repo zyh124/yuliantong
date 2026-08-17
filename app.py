@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 """渔链通 Flask 完整版"""
 from flask import Flask, render_template, request, redirect, url_for, session, jsonify
-import pymysql, bcrypt, os
+import pymysql, bcrypt, os, random
 from datetime import datetime
 from auth import login_required, role_required
 from utils import mask_phone, mask_name, format_price, time_ago
@@ -12,7 +12,7 @@ app.secret_key = os.environ.get('SECRET_KEY', 'ylt-secret-2024-shou')
 def get_db():
     db_host = os.environ.get('DB_HOST', 'localhost')
     if db_host == 'localhost':
-        return pymysql.connect(host='localhost', user='root', password='',
+        return pymysql.connect(host='localhost', user='root', password='574521love',
             database='yuliantong', charset='utf8mb4', cursorclass=pymysql.cursors.DictCursor)
     ssl_args = {'ssl': {}} if os.environ.get('DB_SSL') == 'true' else {}
     return pymysql.connect(

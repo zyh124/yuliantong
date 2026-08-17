@@ -1,4 +1,4 @@
-
+-- 渔链通数据库
 -- CREATE DATABASE IF NOT EXISTS yuliantong DEFAULT CHARSET utf8mb4;
 -- USE yuliantong;
 
